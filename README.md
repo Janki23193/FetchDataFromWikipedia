@@ -1,9 +1,33 @@
 # FetchDataFromWikipedia
-A console app which fetches the data from Wikipedia either by using company name(any string) or ID
+Console App for Fetching Wikipedia Data
+This console application retrieves data from Wikipedia using either a company name (string) or an ID.
 
-Used the httpClient, 
-1 firstly reading the data(input) from the console
-2. Checks whether it's a string or an ID starts with letter 'Q'
-3. Then goes into the function called searchWikiData by taking a string as a parameter(i.e. Skyscanner, google)
-4. In that function we append this tring input with apiurl, using HTTPClient we get the reponse from the url and checks if statuscode in false then simply display the message otherwise, read that response as string and stores into string variable called, jsonResponse then simple deserialize and store into another avriable and if its not null and count > 0 then using for each loop, we display the id, title  and description and returning the first id that found else deserialize failed or no data found
-5.now we have search data and came back to main method and stores that into another variable and it its not null then call another function called GetCompanyHierarchy where we take search data as a parameter, now in that we write the sparqlQuery to show the parent company of that searched data, now we use another url to where we use sparqlQuery repeated the process of HttpClient and deserialise it and all
+Implementation Steps:
+Read Input from Console
+
+The application first reads user input from the console.
+Determine Input Type
+
+It checks whether the input is a string (company name) or an ID (starting with the letter 'Q').
+Call searchWikiData Function
+
+If the input is a string (e.g., Skyscanner, Google), it is passed as a parameter to the searchWikiData function.
+Inside this function:
+The input is appended to the API URL.
+An HTTP request is sent using HttpClient.
+If the request fails (status code is not successful), an error message is displayed.
+Otherwise, the response is read as a string and stored in the variable jsonResponse.
+The JSON response is deserialized into another variable.
+If the deserialized data is not null and has a count greater than zero:
+A foreach loop iterates through the data to display the ID, title, and description.
+The first found ID is returned.
+Otherwise, an error message is displayed (either due to deserialization failure or no data found).
+Retrieve Company Hierarchy
+
+After fetching the search data, control returns to the Main method, where the result is stored in a variable.
+If the result is not null, the GetCompanyHierarchy function is called with the search data as a parameter.
+Inside GetCompanyHierarchy:
+A SPARQL query is written to fetch the parent company of the searched entity.
+Another API URL is constructed using this query.
+An HTTP request is sent using HttpClient, and the response is processed similarly.
+The JSON response is deserialized and displayed accordingly.
